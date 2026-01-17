@@ -35,8 +35,9 @@ passwordInput.addEventListener('keypress', (e) => {
         nameInput.focus();
     }
 });
-
-linkInput.password = passwordInput.value.trim();
+// Funciones
+function login() {
+    const password = passwordInput.value.trim();
     const name = nameInput.value.trim();
     
     // Verificar contraseña
@@ -66,13 +67,7 @@ linkInput.password = passwordInput.value.trim();
 
 function logout() {
     currentUser = null;
-    passwordInput.value = ''
-        alert('Por favor, introduce tu nombre');
-    }
-}
-
-function logout() {
-    currentUser = null;
+    passwordInput.value = '';
     nameInput.value = '';
     loginSection.classList.remove('hidden');
     userSection.classList.add('hidden');
