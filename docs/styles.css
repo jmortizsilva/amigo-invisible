@@ -157,6 +157,12 @@ input[type="url"]:focus {
     margin-top: 20px;
 }
 
+.gifts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
 /* Estilos para las tarjetas de enlaces */
 .link-card {
     background: white;
@@ -198,7 +204,25 @@ input[type="url"]:focus {
 
 .link-card-content {
     flex: 1;
-    padding: 15px;
+    padding-heading {
+    margin: 0 0 8px 0;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.link-title-heading a {
+    color: #333;
+    text-decoration: none;
+}
+
+.link-title-heading a:hover {
+    color: #667eea;
+    text-decoration: underline;
+}
+
+.link-title: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -157,7 +157,7 @@ function loadMyLinks() {
             // Ordenar por fecha (más recientes primero)
             linksArray.sort((a, b) => b.addedAt - a.addedAt);
             
-            myLinks.innerHTML = linksArray.map(link => renderLinkCard(link, true)).join('');
+            myLinks.innerHTML = '<ul class="gifts-list">' + linksArray.map(link => renderLinkCard(link, true)).join('') + '</ul>';
         }
     });
 }
@@ -190,7 +190,7 @@ function loadAllParticipants() {
                         <h4>${name} ${isCurrentUser ? '(Tú)' : ''}</h4>
                         ${linksArray.length === 0 
                             ? '<div class="empty-message">No ha añadido enlaces todavía</div>'
-                            : linksArray.map(link => renderLinkCard(link, false)).join('')
+                            : '<ul class="gifts-list">' + linksArray.map(link => renderLinkCard(link, false)).join('') + '</ul>'
                         }
                     </div>
                 `;
@@ -216,19 +216,21 @@ function renderLinkCard(link, showDelete) {
     const hostname = new URL(url).hostname.replace('www.', '');
     
     return `
-        <div class="link-card ${image ? 'has-image' : ''}">
+        <li class="link-card ${image ? 'has-image' : ''}">
             ${image ? `
                 <div class="link-image">
                     <img src="${image}" alt="${title}" onerror="this.parentElement.style.display='none'">
                 </div>
             ` : ''}
             <div class="link-card-content">
-                <a href="${url}" target="_blank" class="link-title">${title}</a>
+                <h5 class="link-title-heading">
+                    <a href="${url}" target="_blank">${title}</a>
+                </h5>
                 ${description && description !== title ? `<p class="link-card-description">${description}</p>` : ''}
                 <a href="${url}" target="_blank" class="link-card-url">🔗 ${hostname}</a>
             </div>
             ${showDelete ? `<button class="btn btn-danger btn-delete" onclick="deleteLink('${link.id}')">Eliminar</button>` : ''}
-        </div>
+        </li>
     `;
 }
 
