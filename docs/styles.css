@@ -67,7 +67,8 @@ header h1 {
 }
 
 input[type="text"],
-input[type="url"] {
+input[type="url"],
+input[type="password"] {
     flex: 1;
     min-width: 200px;
     padding: 12px 15px;
@@ -78,9 +79,17 @@ input[type="url"] {
 }
 
 input[type="text"]:focus,
-input[type="url"]:focus {
+input[type="url"]:focus,
+input[type="password"]:focus {
     outline: none;
     border-color: #667eea;
+}
+
+.hint {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #999;
+    font-style: italic;
 }
 
 .btn {

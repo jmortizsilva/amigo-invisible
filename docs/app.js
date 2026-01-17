@@ -1,9 +1,13 @@
 let currentUser = null;
 
+// CONTRASEÑA DEL GRUPO - Cámbiala por la que quieras
+const GROUP_PASSWORD = "amigo2026";
+
 // Elementos DOM
 const loginSection = document.getElementById('loginSection');
 const userSection = document.getElementById('userSection');
 const allParticipantsSection = document.getElementById('allParticipantsSection');
+const passwordInput = document.getElementById('passwordInput');
 const nameInput = document.getElementById('nameInput');
 const loginBtn = document.getElementById('loginBtn');
 const logoutBtn = document.getElementById('logoutBtn');
@@ -26,21 +30,43 @@ nameInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') login();
 });
 
-linkInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') addLink();
+passwordInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        nameInput.focus();
+    }
 });
 
-// Funciones
-function login() {
+linkInput.password = passwordInput.value.trim();
     const name = nameInput.value.trim();
-    if (name) {
-        currentUser = name;
-        userName.textContent = name;
-        loginSection.classList.add('hidden');
-        userSection.classList.remove('hidden');
-        loadMyLinks();
-        loadAllParticipants();
-    } else {
+    
+    // Verificar contraseña
+    if (password !== GROUP_PASSWORD) {
+        alert('❌ Contraseña incorrecta. Solo los participantes del grupo pueden acceder.');
+        passwordInput.value = '';
+        passwordInput.focus();
+        return;
+    }
+    
+    if (!name) {
+        alert('Por favor, introduce tu nombre');
+        nameInput.focus();
+        return;
+    }
+    
+    // Guardar contraseña en localStorage para no pedirla de nuevo
+    localStorage.setItem('amigoInvisibleAuth', password);
+    
+    currentUser = name;
+    userName.textContent = name;
+    loginSection.classList.add('hidden');
+    userSection.classList.remove('hidden');
+    loadMyLinks();
+    loadAllParticipants();
+}
+
+function logout() {
+    currentUser = null;
+    passwordInput.value = ''
         alert('Por favor, introduce tu nombre');
     }
 }
@@ -216,6 +242,13 @@ function renderLinkCard(link, showDelete) {
     const hostname = new URL(url).hostname.replace('www.', '');
     
     return `
+    
+    // Verificar si hay contraseña guardada
+    const savedPassword = localStorage.getItem('amigoInvisibleAuth');
+    if (savedPassword === GROUP_PASSWORD) {
+        passwordInput.value = savedPassword;
+    }
+    
         <li class="link-card ${image ? 'has-image' : ''}">
             ${image ? `
                 <div class="link-image">
