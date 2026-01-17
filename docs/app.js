@@ -192,6 +192,9 @@ function loadAllParticipants() {
                 `;
             }).join('');
         }
+    }, (error) => {
+        console.error('Error al cargar participantes:', error);
+        allParticipants.innerHTML = '<div class="empty-message" style="color: red;">Error al cargar participantes. Verifica las reglas de Firebase.</div>';
     });
 }
 
