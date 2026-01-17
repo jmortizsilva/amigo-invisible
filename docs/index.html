@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amigo Invisible - Listas de Regalos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎁 Amigo Invisible - Listas de Regalos</h1>
+            <p class="subtitle">Comparte tus ideas de regalos con tus amigos</p>
+        </header>
+
+        <!-- Sección de login -->
+        <div id="loginSection" class="section">
+            <div class="card">
+                <h2>Identificarse</h2>
+                <p>Introduce tu nombre para ver y editar tu lista de regalos:</p>
+                <div class="input-group">
+                    <input type="text" id="nameInput" placeholder="Tu nombre" />
+                    <button id="loginBtn" class="btn btn-primary">Entrar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección personal (cuando el usuario está identificado) -->
+        <div id="userSection" class="section hidden">
+            <div class="user-header">
+                <h2>Hola, <span id="userName"></span>! 👋</h2>
+                <button id="logoutBtn" class="btn btn-secondary">Cambiar usuario</button>
+            </div>
+
+            <div class="card">
+                <h3>Tu lista de regalos</h3>
+                <p>Añade enlaces a cosas que te gustaría recibir:</p>
+                
+                <div class="add-link-form">
+                    <input type="url" id="linkInput" placeholder="https://ejemplo.com/producto" />
+                    <input type="text" id="descriptionInput" placeholder="Descripción (opcional)" />
+                    <button id="addLinkBtn" class="btn btn-primary">Añadir enlace</button>
+                </div>
+
+                <div id="myLinks" class="links-list"></div>
+            </div>
+        </div>
+
+        <!-- Sección de todos los participantes -->
+        <div id="allParticipantsSection" class="section">
+            <div class="card">
+                <h3>Listas de todos los participantes</h3>
+                <p>Aquí puedes ver qué han pedido los demás:</p>
+                <div id="allParticipants"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    
+    <!-- Configuración de Firebase -->
+    <script src="firebase-config.js"></script>
+    
+    <!-- Aplicación -->
+    <script src="app.js"></script>
+</body>
+</html>
