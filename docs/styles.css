@@ -274,7 +274,7 @@ input[type="url"]:focus {
     border-left: 4px solid #667eea;
 }
 
-.participant-section h4 {
+.participant-section h3 {
     color: #667eea;
     margin-bottom: 15px;
     font-size: 1.3em;

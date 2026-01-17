@@ -187,7 +187,7 @@ function loadAllParticipants() {
                 
                 return `
                     <div class="participant-section">
-                        <h4>${name} ${isCurrentUser ? '(Tú)' : ''}</h4>
+                        <h3>${name} ${isCurrentUser ? '(Tú)' : ''}</h3>
                         ${linksArray.length === 0 
                             ? '<div class="empty-message">No ha añadido enlaces todavía</div>'
                             : '<ul class="gifts-list">' + linksArray.map(link => renderLinkCard(link, false)).join('') + '</ul>'
@@ -223,9 +223,9 @@ function renderLinkCard(link, showDelete) {
                 </div>
             ` : ''}
             <div class="link-card-content">
-                <h5 class="link-title-heading">
+                <h4 class="link-title-heading">
                     <a href="${url}" target="_blank">${title}</a>
-                </h5>
+                </h4>
                 ${description && description !== title ? `<p class="link-card-description">${description}</p>` : ''}
                 <a href="${url}" target="_blank" class="link-card-url">🔗 ${hostname}</a>
             </div>
