@@ -163,17 +163,21 @@ function loadMyLinks() {
 }
 
 function loadAllParticipants() {
+    console.log('loadAllParticipants() llamada');
     allParticipants.innerHTML = '<div class="loading">Cargando participantes...</div>';
     
     // Escuchar cambios en tiempo real
     participantsRef.on('value', (snapshot) => {
+        console.log('Snapshot recibido:', snapshot.val());
         const participants = snapshot.val();
         
-        if (!participants) {
-            allParticipants.innerHTML = '<div class="empty-message">Todavía no hay participantes</div>';
+        if (!participants || Object.keys(participants).length === 0) {
+            allParticipants.innerHTML = '<div class="empty-message">Todavía no hay participantes. ¡Sé el primero en añadir enlaces!</div>';
         } else {
             const participantsArray = Object.entries(participants)
                 .sort(([nameA], [nameB]) => nameA.localeCompare(nameB));
+            
+            console.log('Participantes encontrados:', participantsArray.length);
             
             allParticipants.innerHTML = participantsArray.map(([name, data]) => {
                 const links = data.links || {};
@@ -194,7 +198,12 @@ function loadAllParticipants() {
         }
     }, (error) => {
         console.error('Error al cargar participantes:', error);
-        allParticipants.innerHTML = '<div class="empty-message" style="color: red;">Error al cargar participantes. Verifica las reglas de Firebase.</div>';
+        allParticipants.innerHTML = `
+            <div class="empty-message" style="color: red;">
+                ⚠️ Error al cargar participantes: ${error.message}<br>
+                <small>Verifica las reglas de Firebase o recarga la página</small>
+            </div>
+        `;
     });
 }
 
@@ -224,4 +233,8 @@ function renderLinkCard(link, showDelete) {
 }
 
 // Cargar todos los participantes al inicio (aunque el usuario no esté logueado)
-loadAllParticipants();
+// Esperar a que Firebase se inicialice completamente
+setTimeout(() => {
+    console.log('Iniciando carga de participantes...');
+    loadAllParticipants();
+}, 1000);
